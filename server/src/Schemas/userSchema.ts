@@ -35,7 +35,7 @@ UserSchema.pre<IUser>("save", async function (next) {
 });
 
 UserSchema.methods.matchPassword = async function (enteredPassword: string) {
-    return await bcrypt.compare(this.password, enteredPassword);
+    return await bcrypt.compare(enteredPassword, this.password);
 };
 
 export default UserSchema;
