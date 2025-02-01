@@ -3,6 +3,7 @@ import { Response } from "express";
 import Task from "../models/Task";
 import Project from "../models/Project";
 import { CustomRequest } from "../interfaces/CustomRequest.interface";
+import { sendNotification } from "../utils/socket";
 
 export const createTask = async (req: CustomRequest, res: Response) => {
     const { title, description, status, project } = req.body;
@@ -21,6 +22,8 @@ export const createTask = async (req: CustomRequest, res: Response) => {
         });
 
         await task.save();
+
+        sendNotification(project, `new task added : ${title}`);
 
         res.status(201).json({ "message": "task created successfully" });
 
