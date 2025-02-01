@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 
 import Project from "../models/Project";
 import { CustomRequest } from "../interfaces/CustomRequest.interface";

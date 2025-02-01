@@ -5,6 +5,8 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 
 import userRouter from "./routes/userRouter";
+import projectRouter from "./routes/projectRouter";
+import taskRouter from "./routes/taskRouter";
 
 dotenv.config();
 
@@ -17,6 +19,8 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use("/api/users", userRouter);
+app.use("/api/projects", projectRouter);
+app.use("/api/tasks", taskRouter);
 
 app.get("/", (req, res) => {
     res.send("Hello you !");
