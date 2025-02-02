@@ -3,12 +3,13 @@ import { Response } from "express";
 import Task from "../models/Task";
 import Project from "../models/Project";
 import { CustomRequest } from "../interfaces/CustomRequest.interface";
-import { sendNotification } from "../utils/socket";
+import { createNotification } from "../utils/notification";
+import { IProjectMember } from "../interfaces/Member.interface";
 
 export const createTask = async (req: CustomRequest, res: Response) => {
     const { title, description, status, project } = req.body;
     try {
-        const potentialExistingProject = await Project.findById({ project });
+        const potentialExistingProject = await Project.findById(project).populate<{ members: IProjectMember[] }>("members.user");
 
         if (!potentialExistingProject) {
             res.status(404).json({ "error": "project not found" });
@@ -23,7 +24,15 @@ export const createTask = async (req: CustomRequest, res: Response) => {
 
         await task.save();
 
-        sendNotification(project, `new task added : ${title}`);
+        // IMPORTANT : Should debug this !
+        
+        // if (potentialExistingProject?.members) {
+        //     for (const member of potentialExistingProject?.members) {
+        //         createNotification(member.user._id, project, `new task created : ${title}`);
+        //     }
+        // }
+
+        // sendNotification(project, `new task added : ${title}`);
 
         res.status(201).json({ "message": "task created successfully" });
 

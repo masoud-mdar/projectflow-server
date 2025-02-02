@@ -28,8 +28,8 @@ export const initSocket = (server: http.Server) => {
     return io
 };
 
-export const sendNotification = (projectId: string, message: string) => {
+export const sendNotification = (userId: string, message: string) => {
     if (io) {
-        io.to(projectId).emit("notification", message);
+        io.to(userId).emit("notification", message);
     }
 }
