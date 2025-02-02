@@ -1,10 +1,19 @@
 import http from "http";
-import { Server } from "socket.io";
+import dotenv from "dotenv";
 
 import app from "./app";
 import connectDB from "./config/db";
-import dotenv from "dotenv";
+import logger from "./utils/logger";
 import { initSocket } from "./utils/socket";
+
+process.on("uncaughtException", (err) => {
+    logger.error(`Uncaught Exception Error: ${err.message}`);
+    process.exit(1);
+});
+
+process.on("unhandledRejection", (reason) => {
+    logger.error(`Unhandled Rejection Error: ${reason}`);
+});
 
 dotenv.config();
 

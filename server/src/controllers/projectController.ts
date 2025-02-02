@@ -5,6 +5,7 @@ import { CustomRequest } from "../interfaces/CustomRequest.interface";
 import { IProject } from "../interfaces/Project.interface";
 import { IProjectMember } from "../interfaces/Member.interface";
 import User from "../models/User";
+import logger from "../utils/logger";
 
 export const createProject = async (req: CustomRequest, res: Response) => {
     const { name, description } = req.body;
@@ -33,6 +34,7 @@ export const getAllProjects = async (req: CustomRequest, res: Response) => {
         res.status(200).json(projects);
 
     } catch (error) {
+        logger.error(`error getting projects: ${error}`);
         res.status(500).json({ "error": "internal server error" });
     }
 };

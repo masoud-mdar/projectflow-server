@@ -6,6 +6,8 @@ import { isProjectOwner, isProjectAdmin, isProjectMember } from "../middlewares/
 
 const projectRouter = express.Router();
 
+// Note : to add mongo pagination in the future !
+
 projectRouter.get("/", protect, isProjectMember, getAllProjects);
 projectRouter.post("/", protect, createProject);
 projectRouter.post("/:id/members", protect, isProjectAdmin, addMember);
