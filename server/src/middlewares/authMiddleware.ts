@@ -10,6 +10,8 @@ import { IProjectMember } from "../interfaces/Member.interface";
 export const protect = async (req: CustomRequest, res: Response, next: NextFunction) => {
     let token;
 
+    console.log(req.headers)
+
     if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
         try {
             token = req.headers.authorization.split(" ")[1];
@@ -23,6 +25,7 @@ export const protect = async (req: CustomRequest, res: Response, next: NextFunct
             res.status(401).json({ "error": "not authorized" });
         }
     } else {
+        console.log("pos 2222")
         res.status(401).json({ "error": "not authorized" });
     }
 };

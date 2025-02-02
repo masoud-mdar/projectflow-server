@@ -9,7 +9,8 @@ userRouter.post("/register", registerUser);
 userRouter.post("/login", loginUser);
 
 userRouter.get("/profile", protect, (req, res) =>{
-    // res.json(req);
+    // IMPORTANT : must complete this part !
+    res.json({"message": "ok !"});
 })
 
 export default userRouter;
