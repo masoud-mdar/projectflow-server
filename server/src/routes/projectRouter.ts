@@ -14,4 +14,11 @@ projectRouter.post("/:id/members", protect, isProjectAdmin, addMember);
 projectRouter.delete("/:id", protect, isProjectOwner, deleteProject);
 projectRouter.delete("/:id/members", protect, isProjectAdmin, removeMember);
 
+/**
+ * @swagger
+ * tags:
+ *   name: Projects
+ *   description: Projects management API
+*/
+
 export default projectRouter;

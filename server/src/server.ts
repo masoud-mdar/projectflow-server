@@ -1,6 +1,7 @@
 import http from "http";
 import dotenv from "dotenv";
 
+import { setupSwagger } from "./config/swagger";
 import app from "./app";
 import connectDB from "./config/db";
 import logger from "./utils/logger";
@@ -18,6 +19,8 @@ process.on("unhandledRejection", (reason) => {
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
+
+setupSwagger(app);
 
 const server = http.createServer(app);
 
